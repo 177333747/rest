@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <title>Document</title>
+    <style>[v-cloak] {
+        display: none;
+    }
+    </style>
+</head>
+<body>
+
+    
+<div class="container pt-3" id="app" v-cloak>
+    <h1>Rest API</h1>
+
+    <form class="form-inline mb-3" @submit.prevent="generate">
+       
+        
+        <button class="btn btn-primary" type="submit">Generate</button>
+      </form>
+
+      <div v-if="loading">
+          <loader />
+      </div>
+
+<div v-else-if="contacts.length">
+      <div class="card mb-3" v-for="contact in contacts">
+        <div class="card-body">
+          <p class="card-text":style="{color: contact.marked ? 'red' : 'black'}"><b>Value:</b> {{contact.value}}</p>
+          <p class="card-text"><b>ID:</b> {{contact.id}}</p>
+          <button class="btn btn-primary" @click="retrieve(contact.id)" :disabled="contact.marked">Retrieve</button>
+          <button class="btn btn-danger" @click="removeContact(contact.id)">Delete</button>
+        </div>
+      </div>
+      
+</div>
+<p v-else>Empty</p>
+    </div>
+    <script type="module" src="frontend.js"></script>
+</body>
+</html>
